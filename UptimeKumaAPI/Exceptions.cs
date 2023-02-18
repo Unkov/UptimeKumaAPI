@@ -11,4 +11,9 @@ namespace UptimeKumaAPI
     {
         public IncidentCheckException() : base() { }
     }
+
+    public class PublicGroupListCheckException : Exception
+    {
+        public PublicGroupListCheckException() : base() { }
+    }
 }

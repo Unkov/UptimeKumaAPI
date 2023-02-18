@@ -49,6 +49,24 @@ namespace UptimeKumaAPI
             return status;
         }
 
+        /// <summary>
+        /// Get status page public group list
+        /// </summary>
+        /// <param name="statusPage">Name of status page. Default is "default"</param>
+        /// <returns></returns>
+        /// <exception cref="PublicGroupListCheckException"></exception>
+        public string GetStatusPagePublicGroupList(string statusPage = "default")
+        {
+            var result = Request($"/api/status-page/{statusPage}");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            string status = JObject.Parse(answer).SelectToken("publicGroupList").ToString();
+
+            if (status == "null")
+                throw new PublicGroupListCheckException();
+
+            return status;
+        }
+
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
             return (HttpWebResponse)WebRequest.Create($"{_baseURL}{suburl}?{parametrs}").GetResponse();
