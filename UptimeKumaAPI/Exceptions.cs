@@ -6,4 +6,9 @@ namespace UptimeKumaAPI
     {
         public APIConnectException() : base() { }
     }
+
+    public class IncidentCheckException : Exception
+    {
+        public IncidentCheckException() : base() { }
+    }
 }

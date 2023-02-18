@@ -31,6 +31,24 @@ namespace UptimeKumaAPI
             return JObject.Parse(answer).SelectToken("config").ToString();
         }
 
+        /// <summary>
+        /// Get status page incident
+        /// </summary>
+        /// <param name="statusPage">Name of status page. Default is "default"</param>
+        /// <returns></returns>
+        /// <exception cref="IncidentCheckException"></exception>
+        public string GetStatusPageIncident(string statusPage = "default")
+        {
+            var result = Request($"/api/status-page/{statusPage}");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            string status = JObject.Parse(answer).SelectToken("incident").ToString();
+
+            if (status == "null")
+                throw new IncidentCheckException();
+
+            return status;
+        }
+
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
             return (HttpWebResponse)WebRequest.Create($"{_baseURL}{suburl}?{parametrs}").GetResponse();
