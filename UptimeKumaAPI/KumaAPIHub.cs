@@ -67,6 +67,20 @@ namespace UptimeKumaAPI
             return status;
         }
 
+        /// <summary>
+        /// Get monitors hearbeat list
+        /// </summary>
+        /// <param name="statusPage">Name of status page. Default is "default"</param>
+        /// <returns></returns>
+        public string GetMonitorsHearbeatList(string statusPage = "default")
+        {
+            var result = Request($"/api/status-page/heartbeat/{statusPage}");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            string status = JObject.Parse(answer).SelectToken("heartbeatList").ToString();
+
+            return status;
+        }
+
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
             return (HttpWebResponse)WebRequest.Create($"{_baseURL}{suburl}?{parametrs}").GetResponse();
