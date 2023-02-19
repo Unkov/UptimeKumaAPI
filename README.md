@@ -19,7 +19,7 @@ Example:
 
 `string GetStatusPagePublicGroupList(string statusPage = "default")` - get status page public group list
 
-string GetMonitorsHearbeatList(string statusPage = "default") - get monitors hearbeat list
+`string GetMonitorsHearbeatList(string statusPage = "default")` - get monitors hearbeat list
 
 `string GetMonitorsUptimeList(string statusPage = "default")` - get monitors uptime list
 
