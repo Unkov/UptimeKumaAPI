@@ -128,6 +128,18 @@ namespace UptimeKumaAPI
             return status;
         }
 
+        /// <summary>
+        /// Get status badge of service
+        /// </summary>
+        /// <param name="monitor">ID of service monitor</param>
+        /// <returns></returns>
+        public string GetStatusBadge(int monitor)
+        {
+            var result = Request($"/api/badge/{monitor}/status");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            return answer;
+        }
+
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
             return (HttpWebResponse)WebRequest.Create($"{_baseURL}{suburl}?{parametrs}").GetResponse();
