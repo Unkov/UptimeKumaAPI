@@ -153,6 +153,19 @@ namespace UptimeKumaAPI
             return answer;
         }
 
+        /// <summary>
+        /// Get ping badge of service
+        /// </summary>
+        /// <param name="monitor">ID of service monitor</param>
+        /// <param name="hours"></param>
+        /// <returns></returns>
+        public string GetPingBadge(int monitor, int hours)
+        {
+            var result = Request($"/api/badge/{monitor}/ping/{hours}");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            return answer;
+        }
+
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
             return (HttpWebResponse)WebRequest.Create($"{_baseURL}{suburl}?{parametrs}").GetResponse();
