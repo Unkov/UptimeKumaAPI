@@ -115,6 +115,19 @@ namespace UptimeKumaAPI
             return true;
         }
 
+        /// <summary>
+        /// Get entry page of the Uptime Kuma
+        /// </summary>
+        /// <returns></returns>
+        public string GetEntryPage()
+        {
+            var result = Request("/api/entry-page");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            string status = JObject.Parse(answer).SelectToken("entryPage").ToString();
+
+            return status;
+        }
+
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
             return (HttpWebResponse)WebRequest.Create($"{_baseURL}{suburl}?{parametrs}").GetResponse();
