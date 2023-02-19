@@ -1,5 +1,5 @@
 # UptimeKumaAPI
-Class: KumaAPIHub
+Class: `KumaAPIHub`
 
 # Initialization:
 First you need to connect the library in the "Links". After you have attached it to the project. Initialize with
