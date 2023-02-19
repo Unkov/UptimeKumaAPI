@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
 namespace UptimeKumaAPI
@@ -77,6 +76,20 @@ namespace UptimeKumaAPI
             var result = Request($"/api/status-page/heartbeat/{statusPage}");
             string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
             string status = JObject.Parse(answer).SelectToken("heartbeatList").ToString();
+
+            return status;
+        }
+
+        /// <summary>
+        /// Get monitors uptime list
+        /// </summary>
+        /// <param name="statusPage">Name of status page. Default is "default"</param>
+        /// <returns></returns>
+        public string GetMonitorsUptimeList(string statusPage = "default")
+        {
+            var result = Request($"/api/status-page/heartbeat/{statusPage}");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            string status = JObject.Parse(answer).SelectToken("uptimeList").ToString();
 
             return status;
         }
