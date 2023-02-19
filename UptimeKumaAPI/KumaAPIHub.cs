@@ -93,6 +93,27 @@ namespace UptimeKumaAPI
 
             return status;
         }
+        
+        /// <summary>
+        /// Push the service
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="status"></param>
+        /// <param name="msg"></param>
+        /// <param name="ping"></param>
+        /// <returns></returns>
+        /// <exception cref="PushException"></exception>
+        public bool Push(string code, string status = "up", string msg = "OK", string ping = "")
+        {
+            var result = Request($"/api/push/{code}", $"status={status}&msg={msg}&ping={ping}");
+            string answer = new StreamReader(result.GetResponseStream()).ReadToEnd();
+            string pushStatus = JObject.Parse(answer).SelectToken("ok").ToString();
+
+            if (pushStatus == "false")
+                throw new PushException();
+
+            return true;
+        }
 
         protected static HttpWebResponse Request(string suburl, string parametrs = "")
         {
