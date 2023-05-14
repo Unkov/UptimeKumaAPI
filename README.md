@@ -10,7 +10,7 @@ Next, we initialize the library as an object:
 `KumaAPIHub hub = new KumaAPIHub("url");`
 
 Example:
-`var hub = new KumaAPIHub("https://uptime.unkov.cf/");`
+`var hub = new KumaAPIHub("https://uptime.unkov.su/");`
 
 # Functions in the library:
 `string GetStatusPageConfig(string statusPage = "default")` - get status page config
